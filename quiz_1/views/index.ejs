@@ -1,0 +1,16 @@
+<%- include("./partials/header_nav") %>
+
+<% for(let history of data) { %>
+    <div class="card border-secondary mb-3 mx-auto" style="max-width: 40rem;">
+        <div class="card-header"><%= history.username%> | <%= history.updatedAt%>
+        </div>
+        <div class="card-body text-secondary">
+            <p class="card-text"><%= history.content%></p>
+            <h5 class="card-title"><img src="<%= history.imageUrl%>" style="height:50%; width:50%"></h5>
+        </div>
+    </div>
+
+<%}%>
+
+<%- include("./partials/footer") %>
+

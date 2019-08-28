@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Cluckr</title>
+</head>
+<body>
+
+<nav id="navbar" class="d-flex">
+    <a href="/" class="mr-auto"><img src="/images/chicken_cluckr.jpg" width="50px" height="50px" alt=""></a>
+    <a href="/new" class="btn btn-secondary mx-2">Cluck!</a>
+   <% if (username) { %>
+    <h3 class=" mx-3"><%= username %></h3>
+
+        <a href="/sign_out" class="btn btn-secondary mx-2">Sign Out</a>
+    <% } else { %>
+        <a href="/sign_in" class="btn btn-secondary mx-2">Sign In</a>
+
+    <% } %>
+</nav>
+</body>
+</html>
+
+
