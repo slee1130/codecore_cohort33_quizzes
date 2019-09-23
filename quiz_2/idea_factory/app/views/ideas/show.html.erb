@@ -1,0 +1,69 @@
+<h3>Show Page</h3>
+
+<h1><%= @idea.title %></h1>
+<p><%= @idea.description %></p>
+
+<%if can?(:crud, @idea)%>
+<%= link_to "Edit", edit_idea_path(@idea) %>
+<%= link_to "Delete", idea_path(@idea), method: :delete, data: {confirm: "Are you sure?"} %>
+<%end%>
+
+<h3 class="mt-4">Leave your reviews</h3>
+<div class="form">
+    <%if @review.errors.any?%>
+        <ul>
+            <% @review.errors.full_messages.each do |msg|%>
+            <li class="error-msg"><%=msg%></li>
+            <%end%>
+        </ul>
+        <%end%>
+    <%= form_with model: [@idea, @review], local: true do |f|%>
+        <div>
+        <%= f.label :body%>
+        <%= f.text_area :body, class:"form-control"%>
+        </div>
+        <%=f.submit "Submit", class:"btn btn-outline-primary"%>
+    <%end%>
+</div>
+<% if @like.present? && can?(:destroy, @like)%>
+  <%= link_to(
+  "Unlike",
+  like_path(@like),
+  method: :delete
+  ) %>
+<% elsif can?(:like, @idea) %>
+  <%= link_to(
+        "Like",
+        idea_likes_path(@idea),
+        method: :post
+  ) %>
+<% end %>
+<small>
+  (<%=pluralize(@idea.likes.count, "like")%>)
+</small>
+
+<hr>
+<h3>reviews</h3>
+<% @reviews.each do |review| %>
+        <p style="font-weight: 900"><%=review.body%>
+        <br>
+    <%if can? :crud, review%>
+        <small>
+            reviewed <%=time_ago_in_words(review.created_at)%>ago
+        </small>
+            |
+
+        <small>
+            <%= link_to(
+            "Delete",
+            idea_review_path(@idea, review),
+            method: :delete,
+            data: {
+                confirm: "Are you sure?"
+            }
+            )%>
+        </small>
+        <%end%>
+        <hr/>
+        </p>
+     <%end%>
