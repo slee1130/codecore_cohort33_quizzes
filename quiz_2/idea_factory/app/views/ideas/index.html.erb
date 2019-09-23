@@ -1,0 +1,10 @@
+<h2>All Ideas</h2>
+
+<% @ideas.each do |idea| %>
+    <div>
+        <h2><%= link_to idea.title, idea_path(idea) %></h2>
+        <p><%= idea.description %></p>
+        <li>Likes: <%=idea.likers.count%></li>
+        <hr>
+    </div>
+<% end %>
